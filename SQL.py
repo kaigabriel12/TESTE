@@ -42,4 +42,4 @@ def inserir():
 @app.route('/busca')
 def busca():
     consulta = Dados.query.all()
-    return jsonify(resultado = consulta)
+    return jsonify(dict(resutado = consulta))
