@@ -13,7 +13,7 @@ header_key = '*'
 # configuração base do sqlalchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://kaigabriel12:372306kai@kaigabriel12.mysql.pythonanywhere-services.com/kaigabriel12$rec'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://kaigabriel:372306kai@kaigabriel.mysql.pythonanywhere-services.com/kaigabriel12$default'
 db = SQLAlchemy(app)
 
 # etapa 1 - criação do db
@@ -42,4 +42,4 @@ def inserir():
 @app.route('/busca')
 def busca():
     consulta = Dados.query.all()
-    return tuple(consulta)
+    return str(len(consulta))
