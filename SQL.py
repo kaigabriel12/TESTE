@@ -37,9 +37,9 @@ def inserir():
     novo = Dados(id_voto=1,data_hora='10-10-2010',nome_modelo='cruz')
     db.session.add(novo)
     db.session.commit()
-    return {"inserção": "ok"}
+    return {"inserção": str(len(novo))}
 
 @app.route('/busca')
 def busca():
     consulta = Dados.query.all()
-    return str(consulta)
+    return str(len(consulta))
