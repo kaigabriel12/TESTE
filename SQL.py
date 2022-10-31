@@ -1,9 +1,8 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect,jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import time
 from datetime import datetime, date
-
 
 os.environ["TZ"] = "America/Recife"
 time.tzset()
@@ -38,4 +37,9 @@ def inserir():
     novo = Dados(id_voto=1,data_hora='10-10-2010',nome_modelo='cruz')
     db.session.add(novo)
     db.session.commit()
-    return
+    return {"inserção": "ok"}
+
+@app.route('/busca')
+def busca():
+    consulta = Dados.query.all()
+    return jsonify(resultado = consulta)
