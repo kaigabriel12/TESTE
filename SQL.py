@@ -34,7 +34,7 @@ class Dados(db.Model):
     
 @app.route('/insere')
 def inserir():
-    novo = Dados(id_voto=1,data_hora='10-10-2010',nome_modelo='cruz')
+    novo = Dados(data_hora='10-10-2010',nome_modelo='cruz')
     db.session.add(novo)
     db.session.commit()
     return {"inserção": str(len(novo))}
