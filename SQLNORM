@@ -1,0 +1,290 @@
+import MySQLdb
+from flask import Flask, request, render_template
+from datetime import datetime, date
+import os
+import time
+
+os.environ["TZ"] = "America/Recife"
+time.tzset()
+
+header_key = '*'
+
+app = Flask(__name__)
+
+
+db = MySQLdb.connect(
+    host = "Recnplay2022.mysql.pythonanywhere-services.com",
+    user = "Recnplay2022",
+    passwd = "2507phph",
+    db = "Recnplay2022$default"
+    )
+
+@app.route('/criar')
+def tabelas():
+    cursor = db.cursor()
+    cursor.execute("CREATE TABLE IF NOT EXISTS votacao(id_voto int auto_increment primary key, data varchar(10), hora time ,nome_modelo varchar(15));")
+    cursor.execute("CREATE TABLE IF NOT EXISTS curtida(id_curtida int auto_increment primary key,nome_modelo varchar(15));")
+    db.commit()
+    cursor.close()
+    return 'Tabelas Criadas!'
+
+@app.route('/insere', methods = ['POST','GET'])
+def inserir():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M02');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return {'id':str(voto[0][0])}
+
+@app.route('/curtida')
+def curtida():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M02');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere2')
+def inserir2():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M03');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida2')
+def curtida2():
+    cursor = db.cursor()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    db.commit()
+    cursor.execute("SELECT * FROM curtida;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere3')
+def inserir3():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M04');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida3')
+def curtida3():
+    cursor = db.cursor()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    db.commit()
+    cursor.execute("SELECT * FROM curtida;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere4')
+def inserir4():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M05');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida4')
+def curtida4():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M05');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere5')
+def inserir5():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M06');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida5')
+def curtida5():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M06');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere6')
+def inserir6():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M07');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida6')
+def curtida6():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M07');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere7')
+def inserir7():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M08');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida7')
+def curtida7():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M08');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere8')
+def inserir8():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M09');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida8')
+def curtida8():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M09');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere9')
+def inserir9():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M10');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida9')
+def curtida9():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M10');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere10')
+def inserir10():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M11');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida10')
+def curtida10():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M11');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/insere11')
+def inserir11():
+    cursor = db.cursor()
+    data = str(datetime.today().strftime("%d/%m/%Y"))
+    hora = str(datetime.time(datetime.now()))
+    hora = hora[0:8]
+    cursor.execute("INSERT INTO votacao(data,hora,nome_modelo) values('"+data+"','"+hora+"','M12');")
+    db.commit()
+    cursor.execute("SELECT * FROM votacao;")
+    voto = cursor.fetchall()
+    cursor.close()
+    return str(voto)
+
+@app.route('/curtida11')
+def curtida11():
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO curtida(nome_modelo) values('M12');")
+    db.commit()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM curtida GROUP BY nome_modelo;")
+    curtida = cursor.fetchall()
+    cursor.close()
+    return str(curtida)
+
+@app.route('/contagem')
+def contagem():
+    cursor = db.cursor()
+    cursor.execute("SELECT nome_modelo,COUNT(nome_modelo) FROM votacao GROUP BY nome_modelo;")
+    contagem = cursor.fetchall()
+    cursor.close
+    return str(contagem)
